@@ -31,4 +31,9 @@ public class XR_Camera : MonoBehaviour
             transform.localRotation = gyro.attitude * rotFix;
         }
     }
+
+    private void OnDestroy()
+    {
+        gyro.enabled = false;
+    }
 }
