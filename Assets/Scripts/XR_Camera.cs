@@ -16,8 +16,9 @@ public class XR_Camera : MonoBehaviour
     {
         if (SystemInfo.supportsGyroscope)
         {
-            gyro = Input.gyro;
-            gyro.enabled = true;
+            Input.gyro.enabled = false; // Force reset
+            Input.gyro.enabled = true;  // Reactivate gyroscope
+            gyro = Input.gyro; // Assign gyro after enabling it
             rotFix = new Quaternion(0, 0, 1, 0);
             return true;
         }
@@ -29,11 +30,19 @@ public class XR_Camera : MonoBehaviour
         if (gyroEnabled)
         {
             transform.localRotation = gyro.attitude * rotFix;
+            Debug.Log(gyroEnabled);
         }
+        Debug.Log(gyro.attitude);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        gyro.enabled = false;
+        // Do nothing here, so gyro stays active
+    }
+
+    private void OnEnable()
+    {
+        gyroEnabled = EnableGyro(); // Re-enable when script is enabled again
     }
 }
+
