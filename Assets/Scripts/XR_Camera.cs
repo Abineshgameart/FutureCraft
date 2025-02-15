@@ -30,9 +30,7 @@ public class XR_Camera : MonoBehaviour
         if (gyroEnabled)
         {
             transform.localRotation = gyro.attitude * rotFix;
-            Debug.Log(gyroEnabled);
         }
-        Debug.Log(gyro.attitude);
     }
 
     private void OnDisable()
