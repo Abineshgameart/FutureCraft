@@ -164,7 +164,7 @@
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize",
-                "value": "{\"m_Value\":{\"x\":-3.079033374786377,\"y\":1.570641040802002,\"z\":-5.513709545135498}}"
+                "value": "{\"m_Value\":{\"x\":-2.9379425048828127,\"y\":0.9783253073692322,\"z\":5.258449077606201}}"
             },
             {
                 "type": "UnityEngine.Quaternion, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
