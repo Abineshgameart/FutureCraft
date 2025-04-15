@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -7,6 +5,7 @@ public class CollisionHandler : MonoBehaviour
 {
 
     public Transform correctPosition; // The correct target position on the assembled model
+    public Transform ParentObject;
     public float snapThreshold = 1f; // Distance threshold for snapping
     private XRGrabInteractable grabInteractable;
     private Rigidbody rb;
@@ -18,7 +17,6 @@ public class CollisionHandler : MonoBehaviour
         grabInteractable = GetComponent<XRGrabInteractable>();
         rb = GetComponent<Rigidbody>();
         grabInteractable.selectExited.AddListener(OnRelease);
-        //correctPositionRenderer = correctPosition.GetComponent<MeshRenderer>();
     }
 
     void OnRelease(SelectExitEventArgs args)
@@ -31,14 +29,18 @@ public class CollisionHandler : MonoBehaviour
 
     void SnapToCorrectPosition()
     {
-        transform.position = correctPosition.position;
-        transform.rotation = correctPosition.rotation;
+        transform.position = new Vector3(correctPosition.position.x, correctPosition.position.y, correctPosition.position.z);
+        transform.rotation = transform.rotation = Quaternion.Euler(correctPosition.rotation.eulerAngles);
+        transform.localScale = new Vector3(correctPosition.localScale.x, correctPosition.localScale.y, correctPosition.localScale.z);
+        transform.hasChanged = true;
         rb.isKinematic = true; // Prevent further movement
         grabInteractable.enabled = false; // Disable XRGrabInteractable
         if (correctPositionRenderer != null)
         {
             correctPositionRenderer.enabled = false; // Hide only the mesh renderer
         }
+        //transform.SetParent (ParentObject);
+
     }
 
     private void OnTriggerEnter(Collider other)
